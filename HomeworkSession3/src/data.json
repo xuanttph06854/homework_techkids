@@ -1,0 +1,25 @@
+{
+    "data": [
+        {
+            "time": "Jul 6 2018 - 21:00",
+            "country1": "Vietnam",
+            "flags1": "http://flagpedia.net/data/flags/normal/vn.png",
+            "country2": "Korea",
+            "flags2": "http://flagpedia.net/data/flags/normal/kr.png"
+        },
+        {
+            "time": "Jul 7 2018 - 21:00",
+            "country1": "Japan",
+            "flags1": "http://flagpedia.net/data/flags/normal/jp.png",
+            "country2": "France",
+            "flags2": "http://flagpedia.net/data/flags/normal/fr.png"
+        },
+        {
+            "time": "Jul 8 2018 - 21:00",
+            "country1": "Spain",
+            "flags1": "http://flagpedia.net/data/flags/normal/es.png",
+            "country2": "Germany",
+            "flags2": "http://flagpedia.net/data/flags/normal/de.png"
+        }
+    ]
+}
