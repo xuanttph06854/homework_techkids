@@ -1,0 +1,36 @@
+{
+    "data": [
+        {
+            "title": [
+                "Double Chocolate",
+                "Vanilla Frosted",
+                "Strawberry Frosted",
+                "Boston Kreme."
+            ],
+            "namecake": "Donut",
+            "photo": "http://sv1.upsieutoc.com/2018/09/10/donut.jpg",
+            "color": "#f46388"
+        },
+        {
+            "title": [
+                "Chocolate Coconut Cream Pie",
+                "Chocolate Espresso",
+                "Caramel Chocolate Chip",
+                "Blackforest Cherry",
+                "Red Velvet"
+            ],
+            "namecake": "Cupcake",
+            "photo": "http://sv1.upsieutoc.com/2018/09/10/banh-cupcake.jpg",
+            "color": "#f3b2f6"
+        },
+        {
+            "title": [
+                "Boston cream pie",
+                "Banoffee pie"
+            ],
+            "namecake": "Pastrycake",
+            "photo": "http://sv1.upsieutoc.com/2018/09/10/ptc.jpg",
+            "color": "#ff755e"
+        }
+    ]
+}
