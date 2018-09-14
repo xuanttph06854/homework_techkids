@@ -35,7 +35,7 @@ const Navigation = createStackNavigator({
 });
 export default class App extends Component {
   render() {
-    Orientation.lockToPortrait()
+    //Orientation.lockToPortrait()
     return (
       <View style={{ backgroundColor: 'rgb(230,230,230)', flex: 1 }}>
         <Navigation />

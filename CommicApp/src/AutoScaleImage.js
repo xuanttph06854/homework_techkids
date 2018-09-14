@@ -7,15 +7,33 @@ import {
     Dimensions
 } from 'react-native';
 
+
 class AutoScaleImage extends Component {
-    state = {
-        fixedW: Dimensions.get('window').width,
-        fixedH: 0
+    constructor(props) {
+        super(props)
+        this.state = {
+            fixedW: Dimensions.get('window').width,
+            fixedH: 0,
+            unmounted: false
+        }
     }
-    render() {
-        Image.getSize(this.props.uriImage, (realW, realH) => this.setState({
+
+    componentDidMount() {
+        console.log('componentDidMount')
+        Image.getSize(this.props.uriImage, (realW, realH) => !this.setState.unmounted && this.setState({
             fixedH: this.state.fixedW * realH / realW
-        }))
+        }), () => console.log('setState done'))
+    }
+    componentWillUnmount() {
+        this.setState({ unmounted: true })
+    }
+
+    // state = {
+    //     fixedW: Dimensions.get('window').width,
+    //     fixedH: 0
+    // }
+
+    render() {
         return (
             <Image
                 style={{
@@ -27,5 +45,6 @@ class AutoScaleImage extends Component {
         );
     }
 }
+
 
 export default AutoScaleImage;

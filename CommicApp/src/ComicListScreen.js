@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import {
     FlatList,
-    Button,
+    ActivityIndicator,
     View
 } from 'react-native';
+import axios from 'axios';
 import Comicitems from './Comicitems';
-import { data } from './database.json';
+import ModalSelector from 'react-native-modal-selector';
+//import { data } from './database.json';
 
 export default class ComicListSrceen extends Component {
-    state = {}
+    state = {
+        data: [],
+        loading: true
+    }
 
+    componentDidMount() {
+        this.loadList('Tất cả')
+    }
     renderItem = ({ item }) => <Comicitems comic={item}
         navigation={this.props.navigation} />
     // renderItem = (data) => {
@@ -17,24 +25,46 @@ export default class ComicListSrceen extends Component {
     //     console.log(data)
     //     return <Comicitems comic={data.item} />
     // }
+    loadList(category) {
+        //loading tao biểu tượng load
+        this.setState({ loading: true })
+        category === 'Tất cả'
+            ?
+            axios.get('https://api.techkids.vn/reactnative/api/comics')
+                .then(res => this.setState({ data: res.data.comics, loading: false }))
+                .catch(err => console.log(err)
+                )
+            :
+            axios.get(`https://api.techkids.vn/reactnative/api/comics?category=${category}`)
+                .then(res => this.setState({ data: res.data.comics.comics, loading: false }))
+                .catch(err => console.log(err))
+    }
     render() {
         return (
             <View>
-                <FlatList
-                    data={data}
-                    renderItem={this.renderItem}
-                    numColumns={2}
-                    keyExtractor={(item) => item.id.toString()}
-                // keyExtractor={(item) => {
-                //     console.log('key:..........')
-                //     console.log(item)
-                //     return item.id
-                // }}
+                <ModalSelector
+                    data={
+                        [
+                            { key: 0, label: 'Tất cả' },
+                            { key: 1, label: 'Kinh tế - Chính trị' },
+                            { key: 2, label: 'Con người - Tâm lý học - Hành vi' },
+                            { key: 3, label: 'Văn hoá - Lịch sử - Xã hội' },
+                            { key: 4, label: 'Sức khoẻ' }
+                        ]
+                    }
+                    initValue='Tất cả'
+                    onChange={(option) => this.loadList(option.label)}
                 />
-                {/* <Button
-                    title='Press me'
-                    onPress={() => this.props.navigation.navigate('CommicDetailt')}
-                /> */}
+                {this.state.loading
+                    ? <ActivityIndicator />
+                    : <FlatList
+                        data={this.state.data}
+                        renderItem={this.renderItem}
+                        numColumns={2}
+                        keyExtractor={(item) => item._id.toString()}
+                    />
+                }
+
             </View>
 
         );
