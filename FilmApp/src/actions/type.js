@@ -1,0 +1,1 @@
+export const FLIM_DETAIL = 'film_detail'
