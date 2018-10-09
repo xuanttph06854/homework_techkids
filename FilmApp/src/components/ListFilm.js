@@ -27,6 +27,7 @@ class ListFilm extends Component {
                     data={this.state.data}
                     renderItem={this.renderItem}
                     keyExtractor={(item) => item.id.toString()}
+                    numColumns={2}
                 />
             </View>
         );

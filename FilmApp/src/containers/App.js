@@ -23,25 +23,39 @@ const Navigation = createStackNavigator({
     screen: ListFilm,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: <Text style={{ fontFamily: 'cursive', fontSize: 35, fontWeight: 'bold', color: 'yellow', marginStart: 20 }}>
-          List Film To Day</Text>,
+        headerTitle: <Text style={{ fontFamily: 'cursive', fontSize: 35, fontWeight: 'bold', color: 'yellow', marginStart: 20 }}>Film To Day</Text>,
         headerStyle: {
           backgroundColor: 'black'
+        },
+        headerTitleStyle: {
+          color: 'yellow',
+          alignSelf: 'center',
+          fontFamily: 'cursive',
+          fontSize: 25,
+          fontWeight: 'bold'
         },
       }
     }
   },
   DetailScreen: {
     screen: FilmDetail,
-    // navigationOptions: () => {
-    //   return {
-    //     headerTitle: <Text style={{ fontFamily: 'cursive', fontSize: 35, fontWeight: 'bold', color: 'yellow', marginStart: 20 }}>
-    //       {this.props.navigation.getParam('film').title}</Text>,
-    //     headerStyle: {
-    //       backgroundColor: 'black'
-    //     },
-    //   }
-    // }
+    navigationOptions: ({ navigation }) => {
+      return {
+        title: navigation.getParam('film').title,
+        // headerTitle: <Text style={{ fontFamily: 'cursive', fontSize: 35, fontWeight: 'bold', color: 'black', marginStart: 5 }}>
+        //   Film Detail</Text>,
+        headerStyle: {
+          backgroundColor: '#262626',
+        },
+        headerTitleStyle: {
+          color: 'yellow',
+          alignSelf: 'center',
+          fontFamily: 'cursive',
+          fontSize: 25,
+          fontWeight: 'bold'
+        },
+      }
+    }
   }
 });
 

@@ -23,14 +23,14 @@ class filmItem extends Component {
                 />
                 <View style={styles.contentView}>
                     <Text style={styles.txtStyle}>{this.props.film.original_title}</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row' }}>
                         <Image
-                            style={{ height: 30, width: 30 }}
+                            style={{ height: 24, width: 24 }}
                             source={require('../image/iconstart.png')}
                         />
                         <Text style={styles.txtStyle}>{this.props.film.vote_average}</Text>
                     </View>
-
+                    <Text style={styles.txtStyle}>Release date {this.props.film.release_date}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -39,34 +39,32 @@ class filmItem extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        marginTop: 10,
-        borderRadius: 6,
-        borderWidth: 1,
-        borderColor: '#D7D7D7',
-        width: Dimensions.get('window').width,
         marginStart: 5,
-        height: 110,
+        height: 300,
+        width: Dimensions.get('window').width / 2,
         justifyContent: 'center',
         alignItems: 'center'
     },
     imgStyle: {
-        flex: 1,
-        height: 100,
-        width: 80,
+        //   flex: 1,
+        height: 250,
+        width: 190,
         marginStart: 5
     },
     contentView: {
-        flexDirection: 'column',
-        flex: 1,
+        // flexDirection: 'column',
+        // flex: 1,
+        marginTop: 10,
         marginStart: 10,
+        marginBottom: 40,
         justifyContent: 'center',
         alignItems: 'center'
     },
     txtStyle: {
         color: 'white',
         fontFamily: 'cursive',
-        fontSize: 18
+        fontSize: 14,
+        marginTop: 5
     }
 });
 
