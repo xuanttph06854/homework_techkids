@@ -5,10 +5,14 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
+import firebase from 'react-native-firebase'
 import { backgroundColor, primaryColorBrown, primaryColorRed, primaryColorGreen } from '../styles'
 class SplashScreen
     extends Component {
     state = {}
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(res => console.log(res))
+    }
     renderLogo = () => (
         <Image
             style={styles.imgStyle}

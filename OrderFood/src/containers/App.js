@@ -25,9 +25,9 @@ const SwitchNavigation = createSwitchNavigator({
 })
 
 export default class App extends Component {
-  componentDidMount() {
-    console.log(firebase)
-  }
+  // componentDidMount() {
+  //   console.log(firebase)
+  // }
 
   render() {
     return (
