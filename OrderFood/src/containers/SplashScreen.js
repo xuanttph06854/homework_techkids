@@ -11,7 +11,12 @@ class SplashScreen
     extends Component {
     state = {}
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(res => console.log(res))
+        // neu nguoi dung chua dang nhap thi sau 2s se chuyen qua man hinh login
+        // neu dang nhap roi se chuyen qua man hinh home
+        //firebase.auth().signOut() // cho phep quay lai man hinh login
+        firebase.auth().onAuthStateChanged(res => res !== null
+            ? setTimeout(() => this.props.navigation.navigate('HomeScreen'), 3000)
+            : setTimeout(() => this.props.navigation.navigate('LoginScreen'), 3000))
     }
     renderLogo = () => (
         <Image

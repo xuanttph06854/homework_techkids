@@ -7,9 +7,16 @@ import {
     TextInput,
 } from 'react-native';
 import { Button } from 'react-native-elements'
+import firebase from 'react-native-firebase'
 import { backgroundColor, primaryColorBrown, primaryColorRed, primaryColorGreen } from '../styles'
 class LoginScreen extends Component {
-    state = {}
+    state = {
+        email: '',
+        password: '',
+        err: '',
+        isSignIn: false,
+        isSignUp: false
+    }
     renderLogo = () => (
         <View style={styles.logoStyleView}>
             <Image
@@ -29,11 +36,14 @@ class LoginScreen extends Component {
                         style={styles.loginImg}
                         //resizeMode='contain'
                         source={require('../../imgs/ic_email.png')}
-                        keyboardType={'email-address'}
+
                     />
                     <Text style={styles.txtInput}>Email</Text>
                 </View>
-                <TextInput />
+                <TextInput
+                    keyboardType={'email-address'}
+                    onChangeText={(email) => this.setState({ email })}
+                />
             </View>
             <View style={{ marginTop: 10 }}>
                 <View style={{ flexDirection: 'row' }}>
@@ -47,15 +57,48 @@ class LoginScreen extends Component {
                 </View>
                 <TextInput
                     secureTextEntry={true}
+                    onChangeText={(password) => this.setState({ password })}
                 />
             </View>
         </View>
     )
-    renderSignUp = () => (
+    onSignUp = () => {
+
+        if (this.state.password === '') {
+            this.setState({ err: 'Pls enter password' })
+            return
+        }
+        if (this.state.email === '') {
+            this.setState({ err: 'Pls enter email' })
+            return
+        }
+        this.setState({ isSignUp: true })
+        firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
+            .then(res => this.setState({ err: '', isSignUp: false }))
+            .catch(err => this.setState({ err: err.toString(), isSignUp: false }))
+    }
+
+    onSignIn = () => {
+
+        if (this.state.password === '') {
+            this.setState({ err: 'Pls enter password' })
+            return
+        }
+        if (this.state.email === '') {
+            this.setState({ err: 'Pls enter email' })
+            return
+        }
+        this.setState({ isSignIn: true })
+        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(this.state.email, this.state.password)
+            .then(res => this.setState({ err: '', isSignIn: false }))
+            .catch(err => this.setState({ err: err.toString(), isSignIn: false }))
+    }
+    renderButton = () => (
         <View style={{ flexDirection: 'row' }}>
             <View style={styles.buttonStyle}>
                 <Button
                     title='Sign Up'
+                    onPress={this.onSignUp}
                     buttonStyle={{
                         backgroundColor: primaryColorGreen,
                         width: 100,
@@ -65,11 +108,13 @@ class LoginScreen extends Component {
                         marginTop: 60,
                         //marginBottom: 60
                     }}
+                    loading={this.state.isSignUp}
                 />
             </View>
             <View style={styles.buttonStyle}>
                 <Button
-                    title='Sign Up'
+                    title='Sign In'
+                    onPress={this.onSignIn}
                     buttonStyle={{
                         backgroundColor: primaryColorRed,
                         width: 100,
@@ -77,14 +122,14 @@ class LoginScreen extends Component {
                         borderWidth: 0,
                         borderRadius: 16,
                         marginTop: 60,
-                        //marginBottom: 60
                     }}
+                    loading={this.state.isSignIn}
                 />
             </View>
         </View>
     )
     renderError = () => (
-        <Text style={{ color: 'red' }}>Error....</Text>
+        <Text style={{ color: 'red' }}>{this.state.err}</Text>
     )
     render() {
         return (
@@ -92,7 +137,7 @@ class LoginScreen extends Component {
                 {this.renderLogo()}
                 {this.renderLogin()}
                 {this.renderError()}
-                {this.renderSignUp()}
+                {this.renderButton()}
             </View>
 
         );
