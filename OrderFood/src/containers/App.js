@@ -17,7 +17,6 @@ import firebase from 'react-native-firebase'
 
 import LoginScreen from './Loginscreen';
 import SplashScreen from './SplashScreen'
-import HomeScreen from './HomeScreen'
 import TabMenu from './TabMenu';
 import TabOrder from './TabOrder';
 import TabInfo from './TabInfo';
