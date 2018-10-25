@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import firebase from 'react-native-firebase'
 import MenuItem from '../components/MenuItem'
-import { primaryColorBrown, primaryColorRed, primaryColorGreen, backgroundColor } from '../styles'
+import { primaryColorBrown, primaryColorRed, primaryColorGreen, backgroundColor, componentStyle } from '../styles'
 class TabMenu extends Component {
     state = {
         currentCategory: 'Hamburger',
@@ -70,7 +70,7 @@ class TabMenu extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={componentStyle.screenContainer}>
                 {this.renderCategories()}
                 {this.renderMenu()}
             </View>
@@ -79,11 +79,6 @@ class TabMenu extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-        // marginTop: 10
-    },
     itemCategories: {
         fontWeight: 'bold',
         color: primaryColorGreen,
@@ -91,5 +86,6 @@ const styles = StyleSheet.create({
         marginRight: 15,
     }
 });
+
 
 export default TabMenu;

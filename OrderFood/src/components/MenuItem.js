@@ -7,7 +7,10 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import { primaryColorBrown, primaryColorRed, primaryColorGreen, backgroundColor } from '../styles'
+import { connect } from 'react-redux'
+import { addOrder } from '../actions'
+
+import { primaryColorBrown, primaryColorRed, primaryColorGreen, backgroundColor, componentStyle } from '../styles'
 class MenuItem extends Component {
     state = {}
     render() {
@@ -20,9 +23,13 @@ class MenuItem extends Component {
                 <Text style={styles.nameStyle}>{this.props.item.name}</Text>
                 <Text style={styles.priceStyle}>{this.props.item.price}$</Text>
                 <TouchableOpacity
-                    style={styles.touchStyle}
+                    style={componentStyle.button}
+                    onPress={() => this.props.addOrder({
+                        name: this.props.item.name,
+                        unitPrice: this.props.item.price
+                    })}
                 >
-                    <Text>Add to card</Text>
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>Add to card</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -64,4 +71,4 @@ const styles = StyleSheet.create({
         marginTop: 5
     }
 });
-export default MenuItem;
+export default connect(null, { addOrder })(MenuItem);

@@ -14,6 +14,9 @@ import {
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import firebase from 'react-native-firebase'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from '../reducers'
 
 import LoginScreen from './Loginscreen';
 import SplashScreen from './SplashScreen'
@@ -23,6 +26,7 @@ import TabInfo from './TabInfo';
 import TabHistory from './TabHistory';
 import { primaryColorGreen } from '../styles'
 
+const store = createStore(rootReducer)
 const BottomTabNavigator = createBottomTabNavigator({
   Menu: TabMenu,
   Order: TabOrder,
@@ -46,7 +50,26 @@ const BottomTabNavigator = createBottomTabNavigator({
 
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
-        return <Icon name={iconName} size={25} color={tintColor} />;
+        return <View>
+          <Icon name={iconName} size={25} color={tintColor} />
+          {
+            routeName === 'Order' &&
+            <View
+              style={{
+                position: 'absolute',
+                height: 20,
+                width: 20,
+                backgroundColor: 'red',
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+                left: 15
+              }}
+            >
+              <Text style={{ color: 'white', fontSize: 12 }}>49</Text>
+            </View>
+          }
+        </View>;
       },
     }),
     tabBarOptions: {
@@ -74,7 +97,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <SwitchNavigation />
+      <Provider store={store} >
+        <SwitchNavigation />
+      </Provider>
+
       //<LoginScreen />
     );
   }
