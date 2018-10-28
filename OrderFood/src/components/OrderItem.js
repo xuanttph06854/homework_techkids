@@ -5,14 +5,26 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { primaryColorGreen, primaryColorBrown } from '../styles'
+import { deleteOrder } from '../actions/index'
 class Orderitem extends Component {
-    state = {}
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         amount: 0
+    //     }
+    // }
     render() {
+
         return (
             <View style={styles.container}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => this.props.deleteOrder(
+                        { name: this.props.item.name }
+                    )}
+                >
                     <Icon
                         name='trash'
                         size={25}
@@ -58,4 +70,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Orderitem;
+export default connect(null, { deleteOrder })(Orderitem)

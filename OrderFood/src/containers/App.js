@@ -25,6 +25,7 @@ import TabOrder from './TabOrder';
 import TabInfo from './TabInfo';
 import TabHistory from './TabHistory';
 import { primaryColorGreen } from '../styles'
+import TotalAmount from '../components/TotalAmount';
 
 const store = createStore(rootReducer)
 const BottomTabNavigator = createBottomTabNavigator({
@@ -53,21 +54,7 @@ const BottomTabNavigator = createBottomTabNavigator({
         return <View>
           <Icon name={iconName} size={25} color={tintColor} />
           {
-            routeName === 'Order' &&
-            <View
-              style={{
-                position: 'absolute',
-                height: 20,
-                width: 20,
-                backgroundColor: 'red',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-                left: 15
-              }}
-            >
-              <Text style={{ color: 'white', fontSize: 12 }}>49</Text>
-            </View>
+            routeName === 'Order' && <TotalAmount />
           }
         </View>;
       },
@@ -91,10 +78,6 @@ const SwitchNavigation = createSwitchNavigator({
 
 
 export default class App extends Component {
-  // componentDidMount() {
-  //   console.log(firebase)
-  // }
-
   render() {
     return (
       <Provider store={store} >

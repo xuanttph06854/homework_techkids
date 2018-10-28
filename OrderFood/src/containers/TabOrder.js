@@ -12,14 +12,23 @@ import OrderItem from '../components/OrderItem'
 class TabOrder extends Component {
     state = {
     }
+
+    totalPrice() {
+        let tf = 0
+        this.props.orders.forEach(item => { tf = tf + item.amount * item.unitPrice });
+        console.log("total price: " + tf)
+        return tf
+    }
     renderTitle = () => <Text style={componentStyle.titleStyle}>Order</Text>
     renderOrders = () => (
+
         <FlatList
             style={{ flexGrow: 0 }}
             data={this.props.orders}
             renderItem={({ item }) => <OrderItem item={item} />}
             keyExtractor={item => item.name}
         />
+
     )
     renderTotal = () => (
         <View>
@@ -33,7 +42,7 @@ class TabOrder extends Component {
             />
             <View style={{ flexDirection: 'row' }}>
                 <Text style={[componentStyle.titleStyle, { flex: 1 }]}>Total</Text>
-                <Text style={componentStyle.titleStyle}>100$</Text>
+                <Text style={componentStyle.titleStyle}>{this.totalPrice()}$</Text>
             </View>
         </View>
 
@@ -51,6 +60,7 @@ class TabOrder extends Component {
 
     render() {
         return (
+
             <View style={componentStyle.screenContainer}>
                 {this.renderTitle()}
                 {this.renderOrders()}
