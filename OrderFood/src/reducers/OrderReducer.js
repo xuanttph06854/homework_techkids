@@ -27,7 +27,24 @@ export default function (state = [], action) {
             }
 
         case DELETE_ORDER:
-            return state.filter(item => item.name !== action.payload.name)
+            console.log(action.payload)
+            let amountOrder = action.payload.item.amount
+            console.log(amountOrder)
+            if (amountOrder === 0) {
+                return state.filter(item => item.name !== action.payload.item.name)
+            } else {
+                console.log(state)
+                return state.map(
+                    item => item.name === action.payload.item.name
+                        ? {
+                            name: item.name,
+                            unitPrice: item.unitPrice,
+                            amount: item.amount - 1
+                        }
+                        : item
+                )
+            }
+
         default: return state
     }
 }

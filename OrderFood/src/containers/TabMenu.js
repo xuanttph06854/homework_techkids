@@ -62,7 +62,7 @@ class TabMenu extends Component {
         <FlatList
             data={this.state.dishes}
             renderItem={this.renderItemMenu}
-            keyExtractor={(item) => item}
+            keyExtractor={(item) => item.name}
             numColumns={2}
         />
     )

@@ -16,7 +16,7 @@ class TabOrder extends Component {
     totalPrice() {
         let tf = 0
         this.props.orders.forEach(item => { tf = tf + item.amount * item.unitPrice });
-        console.log("total price: " + tf)
+        //console.log("total price: " + tf)
         return tf
     }
     renderTitle = () => <Text style={componentStyle.titleStyle}>Order</Text>
@@ -59,6 +59,7 @@ class TabOrder extends Component {
     </TouchableOpacity>
 
     render() {
+
         return (
 
             <View style={componentStyle.screenContainer}>

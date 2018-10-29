@@ -10,37 +10,40 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { primaryColorGreen, primaryColorBrown } from '../styles'
 import { deleteOrder } from '../actions/index'
 class Orderitem extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         amount: 0
-    //     }
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
     render() {
-
+        console.log(this.props.orders)
         return (
-            <View style={styles.container}>
-                <TouchableOpacity
-                    onPress={() => this.props.deleteOrder(
-                        { name: this.props.item.name }
-                    )}
-                >
-                    <Icon
-                        name='trash'
-                        size={25}
-                        color={primaryColorGreen}
-                        style={{ marginHorizontal: 7 }}
-                    />
-                </TouchableOpacity>
-                <Text
-                    style={styles.amount}
-                >{this.props.item.amount}</Text>
-                <Text
-                    style={styles.foodName}
-                >{this.props.item.name}</Text>
-                <Text style={styles.price}>
-                    {`${this.props.item.unitPrice * this.props.item.amount}$`}</Text>
-            </View>
+            this.props.item.amount === 0
+                ? null
+                : <View style={styles.container}>
+                    <TouchableOpacity
+                        onPress={() => this.props.deleteOrder(
+                            {
+                                item: this.props.item
+                            }
+                        )}
+                    >
+                        <Icon
+                            name='trash'
+                            size={25}
+                            color={primaryColorGreen}
+                            style={{ marginHorizontal: 7 }}
+                        />
+                    </TouchableOpacity>
+                    <Text
+                        style={styles.amount}
+                    >{this.props.item.amount}</Text>
+                    <Text
+                        style={styles.foodName}
+                    >{this.props.item.name}</Text>
+                    <Text style={styles.price}>
+                        {`${this.props.item.unitPrice * this.props.item.amount}$`}</Text>
+                </View>
         );
     }
 }
@@ -69,5 +72,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 });
-
-export default connect(null, { deleteOrder })(Orderitem)
+const mapStateToProps = ({ orders }) => ({ orders })
+export default connect(mapStateToProps, { deleteOrder })(Orderitem)

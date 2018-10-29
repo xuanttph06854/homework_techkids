@@ -10,23 +10,14 @@ class TotalAmount extends Component {
 
     countOrder = () => {
         let total = 0
-        this.props.orders.map(item => total += item.amount)
+        this.props.orders.forEach(item => total += item.amount)
         return total
     }
     render() {
         return (
             this.countOrder() == 0
                 ? null
-                : <View style={{
-                    position: 'absolute',
-                    height: 20,
-                    width: 20,
-                    backgroundColor: 'red',
-                    borderRadius: 10,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    left: 15
-                }}>
+                : <View style={styles.totalAmount}>
                     <Text style={{ color: 'white', fontSize: 12 }}>{this.countOrder()}</Text>
                 </View>
         );
