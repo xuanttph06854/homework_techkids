@@ -4,10 +4,9 @@ import {
     View,
     StyleSheet
 } from 'react-native';
-import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import firebase from 'react-native-firebase'
-class TotalAmount extends Component {
+import Icon from 'react-native-vector-icons/FontAwesome'
+class OnGoingTotal extends Component {
     state = {
         history: []
     }
@@ -16,21 +15,16 @@ class TotalAmount extends Component {
         firebase.database().ref('/users').child(firebase.auth().currentUser.uid).child('history')
             .on('value', res => this.setState({ history: res._value.filter(e => e.onGoing === true) }))
     }
-    countOrder = () => {
-        let total = 0
-        this.props.orders.forEach(item => total += item.amount)
-        return total
+    historyTotal() {
+        return this.state.history.length
     }
     render() {
+        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++")
+        console.log(this.state.history.length)
         return (
+
             <View>
                 <Icon name={this.props.iconName} size={25} color={this.props.tintColor} />
-                {this.props.routeName === 'Order' && this.countOrder() !== 0
-                    ? <View style={styles.totalAmount}>
-                        <Text style={{ color: 'white', fontSize: 12 }}>{this.countOrder()}</Text>
-                    </View>
-                    : null
-                }
                 {this.props.routeName === 'History' && this.state.history.length !== 0
                     ? <View style={styles.onGoingStyle}>
                         <Text style={{ color: 'white', fontSize: 12 }}>{this.state.history.length}</Text>
@@ -42,16 +36,6 @@ class TotalAmount extends Component {
     }
 }
 const styles = StyleSheet.create({
-    totalAmount: {
-        position: 'absolute',
-        height: 20,
-        width: 20,
-        backgroundColor: 'red',
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        left: 15
-    },
     onGoingStyle: {
         position: 'absolute',
         height: 20,
@@ -63,5 +47,4 @@ const styles = StyleSheet.create({
         left: 15
     }
 });
-const mapStateToProps = ({ orders }) => ({ orders })
-export default connect(mapStateToProps)(TotalAmount);
+export default OnGoingTotal;

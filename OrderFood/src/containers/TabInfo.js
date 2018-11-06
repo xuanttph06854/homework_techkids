@@ -5,34 +5,17 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
-import { primaryColorRed } from '../styles'
+import { primaryColorRed, componentStyle, primaryColorGreen } from '../styles'
+import InfoItem from './InfoItem';
 class TabInfo extends Component {
     state = {}
     render() {
         return (
-            <View>
+            <View style={componentStyle.screenContainer}>
                 <Text style={styles.titleStyle}>Infomation</Text>
-                <View style={styles.infoStyle}>
-                    <Image
-                        style={styles.iconStyle}
-                        source={require('../../imgs/ic_location.png')}
-                    />
-                    <Text style={styles.txtStyle}>22C - Thành Công - Ba Đình - Hà Nội</Text>
-                </View>
-                <View style={styles.infoStyle}>
-                    <Image
-                        style={styles.iconStyle}
-                        source={require('../../imgs/ic_username.png')}
-                    />
-                    <Text style={styles.txtStyle}>Xuan Mario</Text>
-                </View>
-                <View style={styles.infoStyle}>
-                    <Image
-                        style={styles.iconStyle}
-                        source={require('../../imgs/ic_phone_number.png')}
-                    />
-                    <Text style={styles.txtStyle}>0946716615</Text>
-                </View>
+                <InfoItem type={'address'} icon={'location-arrow'} />
+                <InfoItem type={'username'} icon={'user'} />
+                <InfoItem type={'phone'} icon={'phone'} />
             </View>
         );
     }

@@ -14,6 +14,7 @@ import { primaryColorBrown, primaryColorRed, primaryColorGreen, backgroundColor,
 class MenuItem extends Component {
     state = {}
     render() {
+        //  console.log(this.props.item)
         return (
             <View style={styles.container}>
                 <Image
@@ -26,7 +27,7 @@ class MenuItem extends Component {
                     style={componentStyle.button}
                     onPress={() => this.props.addOrder({
                         name: this.props.item.name,
-                        unitPrice: this.props.item.price
+                        unitPrice: this.props.item.price,
                     })}
                 >
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>Add to card</Text>

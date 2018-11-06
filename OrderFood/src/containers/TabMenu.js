@@ -4,7 +4,8 @@ import {
     View,
     StyleSheet,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    TextInput
 } from 'react-native';
 import firebase from 'react-native-firebase'
 import MenuItem from '../components/MenuItem'
@@ -18,7 +19,7 @@ class TabMenu extends Component {
         // console.log("loading")
         firebase.database().ref(`dishes/${this.state.currentCategory}`)
             .on('value', res => this.setState({ dishes: res._value }))
-        //.on('value', res => console.log(res))
+        // .on('value', res => console.log(res))
         // .on la co che lang nghe lien tuc, database thay doi thi load lai data
     }
     componentDidMount() {

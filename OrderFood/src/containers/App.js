@@ -11,7 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
+import { createSwitchNavigator, createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import firebase from 'react-native-firebase'
 import { Provider } from 'react-redux'
@@ -26,14 +26,32 @@ import TabInfo from './TabInfo';
 import TabHistory from './TabHistory';
 import { primaryColorGreen } from '../styles'
 import TotalAmount from '../components/TotalAmount';
+import OnGoingTotal from '../components/OnGoingTotal';
+
 
 const store = createStore(rootReducer)
-const BottomTabNavigator = createBottomTabNavigator({
-  Menu: TabMenu,
-  Order: TabOrder,
-  Info: TabInfo,
-  History: TabHistory
-},
+const Navigation = createStackNavigator({
+  order: {
+    screen: TabOrder,
+    navigationOptions: {
+      header: null
+    }
+  },
+  historyTab: {
+    screen: TabHistory,
+    navigationOptions: {
+      header: null
+    }
+  }
+})
+const BottomTabNavigator = createBottomTabNavigator(
+  {
+    Menu: TabMenu,
+    Order: Navigation,
+    History: TabHistory,
+    Info: TabInfo
+
+  },
   {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
@@ -52,11 +70,10 @@ const BottomTabNavigator = createBottomTabNavigator({
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
         return <View>
-          <Icon name={iconName} size={25} color={tintColor} />
-          {
-            routeName === 'Order' && <TotalAmount />
-          }
-        </View>;
+          <TotalAmount iconName={iconName} routeName={routeName} tintColor={tintColor} />
+          {/* <OnGoingTotal iconName={iconName} routeName={routeName} tintColor={tintColor} /> */}
+        </View>
+
       },
     }),
     tabBarOptions: {
@@ -65,15 +82,13 @@ const BottomTabNavigator = createBottomTabNavigator({
       style: {
         backgroundColor: 'white'
       }
-    },
-  }
-
-)
+    }
+  })
 
 const SwitchNavigation = createSwitchNavigator({
   SplashScreen: SplashScreen,
   LoginScreen: LoginScreen,
-  HomeScreen: BottomTabNavigator
+  HomeScreen: BottomTabNavigator,
 })
 
 
@@ -83,8 +98,6 @@ export default class App extends Component {
       <Provider store={store} >
         <SwitchNavigation />
       </Provider>
-
-      //<LoginScreen />
     );
   }
 }

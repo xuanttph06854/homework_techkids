@@ -16,25 +16,29 @@ class Orderitem extends Component {
         }
     }
     render() {
-        console.log(this.props.orders)
+        // console.log(this.props.orders)
         return (
             this.props.item.amount === 0
                 ? null
                 : <View style={styles.container}>
-                    <TouchableOpacity
-                        onPress={() => this.props.deleteOrder(
-                            {
-                                item: this.props.item
-                            }
-                        )}
-                    >
-                        <Icon
-                            name='trash'
-                            size={25}
-                            color={primaryColorGreen}
-                            style={{ marginHorizontal: 7 }}
-                        />
-                    </TouchableOpacity>
+                    {this.props.historyMode === false &&
+                        <TouchableOpacity
+                            onPress={() => this.props.deleteOrder(
+                                {
+                                    item: this.props.item
+                                }
+                            )}
+                        >
+
+                            <Icon
+                                name='trash'
+                                size={25}
+                                color={primaryColorGreen}
+                                style={{ marginHorizontal: 7 }}
+                            />
+
+                        </TouchableOpacity>
+                    }
                     <Text
                         style={styles.amount}
                     >{this.props.item.amount}</Text>
